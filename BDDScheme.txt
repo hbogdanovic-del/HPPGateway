@@ -1,0 +1,35 @@
+[Tenant]
+id : int
+nom : string
+created_at : timestamp
+mail : string
+
+[Role]
+role : string = ADMIN|DEV|USER|OWNER
+
+[User]
+id : int
+id_tenant : int
+nom : string
+prenom : string
+role : string
+created_at : timestamp
+
+[api]
+id : int
+id_tenant : int
+nom : string
+created_at : timestamp
+base_uri : string
+
+[api_key]
+id : int
+id_tenant : int
+id_user : int
+id_api : int
+scopes : string
+last_used : timestamp
+created_at : timestamp
+created_by : int (user)
+revoked : bool
+pepper_version : int
