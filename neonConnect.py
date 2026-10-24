@@ -2,6 +2,7 @@ import dotenv
 import os
 import psycopg2
 import sqlalchemy as alchemy
+from models.decalreDB import Base
 
 env = dotenv.load_dotenv(".env")
 
@@ -19,9 +20,9 @@ def test_engine(uri):
         res = conn.execute(alchemy.text("SELECT version()"))
         conn.commit()
         if res :
-            print(res.all())
+            return True
         else :
-            print("error")
+            return False
 
 def test_conn(uri):
 
@@ -31,6 +32,3 @@ def test_conn(uri):
         print(cur.fetchone())
     conn.close()
 
-
-test_conn(pg_uri)
-test_engine(alchemy_uri)
