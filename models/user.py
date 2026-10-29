@@ -1,7 +1,6 @@
-from .decalreDB import Base
+from .base import Base
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import String, ForeignKey, DateTime
-from .tenant import Tenant
 
 class User(Base):
     __tablename__ = "user"

@@ -1,9 +1,6 @@
-from .decalreDB import Base
+from .base import Base
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import String, ForeignKey, DateTime, Boolean, Integer
-from .tenant import Tenant
-from .user import User
-from .api import API
 
 class APIKey(Base):
     __tablename__ = "api_key"

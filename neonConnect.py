@@ -33,5 +33,4 @@ def test_conn(uri):
         print(cur.fetchone())
     conn.close()
 
-tenant1 = Tenant_Controller.create("Test", "Test@test.test")
-print(tenant1)
+tenant = Tenant_Controller.read(2)

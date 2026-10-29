@@ -1,10 +1,11 @@
 import datetime
 from sqlalchemy.orm import Session
-from sqlalchemy import engine
+from sqlalchemy import engine, select
 from models.tenant import Tenant
 import conf as cf
+from pydantic import BaseModel
 
-class Tenant_Controller:
+class Tenant_Controller(BaseModel):
 
     def create(nom:str, mail:str) -> Tenant :
         timestamp = datetime.datetime.now()
@@ -16,3 +17,12 @@ class Tenant_Controller:
         cf.session.add(tenant)
         cf.session.commit()
         return tenant
+
+    def read(id:int) -> Tenant:
+        stmt=select(Tenant).where(Tenant.id == id)
+        res = cf.session.scalars(stmt)
+        res = res.fetchall()
+        if len(res > 1):
+            raise Exception("Plus d'une ligne trouvé")
+        return res
+
