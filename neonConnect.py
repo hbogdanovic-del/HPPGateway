@@ -3,6 +3,7 @@ import os
 import psycopg2
 import sqlalchemy as alchemy
 from models.decalreDB import Base
+from controller.TenantController import Tenant_Controller
 
 env = dotenv.load_dotenv(".env")
 
@@ -10,9 +11,9 @@ pg_host = os.getenv("pg_host")
 pg_role = os.getenv("pg_role")
 pg_pass = os.getenv("pg_pass")
 pg_base = os.getenv("pg_base")
+alchemy_uri = f"postgresql+psycopg2://{pg_role}:{pg_pass}@{pg_host}/{pg_base}?sslmode=require&channel_binding=require"
 
 pg_uri = f"postgresql://{pg_role}:{pg_pass}@{pg_host}/{pg_base}?sslmode=require&channel_binding=require"
-alchemy_uri = f"postgresql+psycopg2://{pg_role}:{pg_pass}@{pg_host}/{pg_base}?sslmode=require&channel_binding=require"
 
 def test_engine(uri):
     engine = alchemy.create_engine(uri)
@@ -32,3 +33,5 @@ def test_conn(uri):
         print(cur.fetchone())
     conn.close()
 
+tenant1 = Tenant_Controller.create("Test", "Test@test.test")
+print(tenant1)
